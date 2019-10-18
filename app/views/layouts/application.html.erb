@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TodayIHave</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class='container'>
+      <nav class="navbar navbar-light justify-content-right blue-grey lighten-5 mb-4" style="background-color: #e3f2fd;">
+        <ul class="nav justify-content-right">
+          <li class="nav-item">
+            <%= link_to 'Home', root_path, class:'btn btn-outline-success' %>
+          </li>
+          <% if current_user %>
+            <li class="nav-item">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'btn btn-outline-dark' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Sign Up', new_user_registration_path, class:'btn btn-outline-success' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign In', new_user_session_path, class:'btn btn-outline-success' %>
+            </li>
+          <% end %>
+          <%= form_tag posts_url, method: :get, class:"form-inline ml-auto"  do %>
+            <div class="md-form my-0">
+              <%= text_field_tag :keyword, params[:keyword], placeholder: "Search posts...", class:"form-control" %>
+              <%= submit_tag 'Search', name: nil, class:"btn btn-outline-white btn-md my-0 ml-sm-2" %>
+            </div>
+          <% end %>
+        </ul>
+      </nav>
+      <%= yield %>
+    </div>
+  </body>
+</html>
+<script>
+  $(document).on('ready page:load', function () {
+    $('#post_tag_ids').chosen({
+      allow_single_deselect: true,
+      width: '100%'
+    })
+  });
+</script>

@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#Need to use more descriptive names!!
+post_with_short_body:
+  title: MyString1454334
+  body: tooShort
+  user_id: 2
+
+correct_post:
+  title: random456465
+  body: This is fine
+  user_id: 1

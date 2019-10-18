@@ -1,0 +1,26 @@
+<%= simple_form_for(@post, url: posts_path, local: true, html: { class: 'form-group' }) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= form.input :tag_ids, as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}%>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
